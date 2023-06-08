@@ -1,5 +1,5 @@
-import 'package:alquran_new/models/juz_model.dart';
-import 'package:alquran_new/services/juz/juz.dart';
+import 'package:alquran_new/models/juz/juz_model.dart';
+import 'package:alquran_new/services/juz_services/juz.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 

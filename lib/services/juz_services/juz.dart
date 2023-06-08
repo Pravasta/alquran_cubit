@@ -1,6 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import '../../models/juz_model.dart';
+import '../../models/juz/juz_model.dart';
 
 class JuzService {
   List<Juz> listJuzz = [];

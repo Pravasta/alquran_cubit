@@ -2,12 +2,13 @@ import 'package:alquran_new/shared/theme.dart';
 import 'package:flutter/material.dart';
 
 class PerAyatWidget extends StatelessWidget {
-  const PerAyatWidget(
-      {super.key,
-      required this.numberAyat,
-      required this.ayatSurah,
-      required this.terjemahanSurah,
-      required this.latinSurah});
+  const PerAyatWidget({
+    super.key,
+    required this.numberAyat,
+    required this.ayatSurah,
+    required this.terjemahanSurah,
+    required this.latinSurah,
+  });
 
   final String numberAyat;
   final String ayatSurah;
@@ -16,8 +17,7 @@ class PerAyatWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(top: defaultMargin + 6),
+    return SizedBox(
       width: double.infinity,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -28,6 +28,12 @@ class PerAyatWidget extends StatelessWidget {
             decoration: BoxDecoration(
               color: bottomNavbarColor,
               borderRadius: BorderRadius.circular(15),
+              gradient: LinearGradient(
+                colors: [
+                  bottomNavbarColor,
+                  purpleColor,
+                ],
+              ),
             ),
             child: Row(
               children: [

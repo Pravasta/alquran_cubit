@@ -1,7 +1,7 @@
-import 'package:alquran_new/models/surah_model.dart';
+import 'package:alquran_new/models/surah/surah_model.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import '../../services/surah/get_api_quran_services.dart';
+import '../../services/surah_services/get_api_quran_services.dart';
 
 part 'get_api_quran_state.dart';
 

@@ -1,10 +1,10 @@
-import 'package:alquran_new/cubit/surah/get_api_quran_cubit.dart';
+import 'package:alquran_new/cubit/surah_cubit/get_api_quran_cubit.dart';
 import 'package:alquran_new/shared/theme.dart';
 import 'package:alquran_new/ui/pages/detail_surah.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../models/surah_model.dart';
+import '../../models/surah/surah_model.dart';
 
 class SurahTab extends StatefulWidget {
   const SurahTab({super.key});

@@ -1,6 +1,7 @@
-import 'package:alquran_new/cubit/juz/juz_cubit.dart';
-import 'package:alquran_new/models/juz_model.dart' as j;
+import 'package:alquran_new/cubit/juz_cubit/juz_cubit.dart';
+import 'package:alquran_new/models/juz/juz_model.dart' as j;
 import 'package:alquran_new/shared/theme.dart';
+import 'package:alquran_new/ui/pages/detail_juz_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -32,10 +33,20 @@ class _JuzTabState extends State<JuzTab> {
               itemCount: 30,
               itemBuilder: (context, index) {
                 j.Juz juz = state.juz[index];
+
                 return Column(
                   children: [
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return DetailJuzPage(juz: juz);
+                            },
+                          ),
+                        );
+                      },
                       child: Container(
                         width: double.infinity,
                         margin: EdgeInsets.only(top: defaultMargin, bottom: 16),

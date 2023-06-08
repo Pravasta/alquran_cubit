@@ -1,10 +1,11 @@
-import 'package:alquran_new/cubit/detail_surah/get_detail_surah_cubit.dart';
-import 'package:alquran_new/models/surah_model.dart';
+import 'package:alquran_new/cubit/detail_surah_cubit/get_detail_surah_cubit.dart';
+import 'package:alquran_new/models/surah/surah_model.dart';
 import 'package:alquran_new/shared/theme.dart';
-import 'package:alquran_new/ui/widgets/header_widget.dart';
 import 'package:alquran_new/ui/widgets/per_ayat_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../widgets/header_widget.dart';
 
 class DetailSurahPage extends StatefulWidget {
   const DetailSurahPage({super.key, required this.surah});
@@ -26,51 +27,52 @@ class _DetailSurahPageState extends State<DetailSurahPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: primaryColor,
-      body: SafeArea(
-        child: Padding(
+      body: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) {
+          return [
+            SliverAppBar(
+              pinned: true,
+              elevation: 0,
+              backgroundColor: primaryColor,
+              automaticallyImplyLeading: false,
+              bottom: PreferredSize(
+                preferredSize: const Size.fromHeight(0),
+                child: _header(context),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.only(
+                  left: defaultMargin,
+                  right: defaultMargin,
+                ),
+                child: _cardJudul(),
+              ),
+            ),
+          ];
+        },
+        body: Padding(
           padding: EdgeInsets.only(
             left: defaultMargin,
             right: defaultMargin,
           ),
-          child: NestedScrollView(
-            headerSliverBuilder: (context, innerBoxIsScrolled) {
-              return [
-                SliverAppBar(
-                  pinned: true,
-                  elevation: 0,
-                  backgroundColor: primaryColor,
-                  automaticallyImplyLeading: false,
-                  bottom: PreferredSize(
-                    preferredSize: const Size.fromHeight(-3),
-                    child: _header(),
-                  ),
-                ),
-                SliverToBoxAdapter(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _cardJudul(),
-                    ],
-                  ),
-                ),
-              ];
-            },
-            body: Column(
-              children: [
-                _bodySurah(),
-              ],
-            ),
+          child: Column(
+            children: [
+              _bodySurah(),
+            ],
           ),
         ),
       ),
     );
   }
 
-  Widget _header() {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 15),
-      child: HeaderWidget(
-        title: widget.surah.name!.transliteration!.id!,
+  AppBar _header(BuildContext context) {
+    return AppBar(
+      automaticallyImplyLeading: false,
+      backgroundColor: primaryColor,
+      elevation: 0,
+      title: RowHeaderWidget(
+        title: '${widget.surah.name!.transliteration!.id}',
         iconUrl: 'assets/icon_arrow_back.png',
         onTap: () {
           Navigator.pop(context);
@@ -82,7 +84,7 @@ class _DetailSurahPageState extends State<DetailSurahPage> {
   Widget _cardJudul() {
     return Padding(
       padding: EdgeInsets.only(
-        top: defaultMargin + 10,
+        top: defaultMargin,
       ),
       child: GestureDetector(
         onTap: () {
