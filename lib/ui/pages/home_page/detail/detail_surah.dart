@@ -5,7 +5,7 @@ import 'package:alquran_new/ui/widgets/per_ayat_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../widgets/header_widget.dart';
+import '../../../widgets/header_widget.dart';
 
 class DetailSurahPage extends StatefulWidget {
   const DetailSurahPage({super.key, required this.surah});

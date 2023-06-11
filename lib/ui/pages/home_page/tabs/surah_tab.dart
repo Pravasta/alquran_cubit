@@ -1,52 +1,48 @@
-import 'package:alquran_new/cubit/juz_cubit/juz_cubit.dart';
-import 'package:alquran_new/models/juz/juz_model.dart' as j;
+import 'package:alquran_new/cubit/surah_cubit/get_api_quran_cubit.dart';
 import 'package:alquran_new/shared/theme.dart';
-import 'package:alquran_new/ui/pages/detail_juz_page.dart';
+import 'package:alquran_new/ui/pages/home_page/detail/detail_surah.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class JuzTab extends StatefulWidget {
-  const JuzTab({super.key});
+import '../../../../models/surah/surah_model.dart';
+
+class SurahTab extends StatefulWidget {
+  const SurahTab({super.key});
 
   @override
-  State<JuzTab> createState() => _JuzTabState();
+  State<SurahTab> createState() => _SurahTabState();
 }
 
-class _JuzTabState extends State<JuzTab> {
+class _SurahTabState extends State<SurahTab> {
   @override
   void initState() {
-    context.read<JuzCubit>().getJuzQuran();
+    context.read<GetApiQuranCubit>().getAllSurah();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<JuzCubit, JuzState>(
+    return BlocBuilder<GetApiQuranCubit, GetApiQuranState>(
       builder: (context, state) {
-        if (state is JuzLoading) {
+        if (state is GetApiQuranLoading) {
           return const Center(
             child: CircularProgressIndicator(),
           );
         } else {
-          if (state is JuzzSuccess) {
+          if (state is GetApiQuranSucces) {
             return ListView.builder(
-              itemCount: 30,
+              itemCount: state.surah.length,
               itemBuilder: (context, index) {
-                j.Juz juz = state.juz[index];
-
+                Surah surah = state.surah[index];
                 return Column(
                   children: [
                     GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return DetailJuzPage(juz: juz);
-                            },
-                          ),
-                        );
-                      },
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailSurahPage(surah: surah),
+                        ),
+                      ),
                       child: Container(
                         width: double.infinity,
                         margin: EdgeInsets.only(top: defaultMargin, bottom: 16),
@@ -65,11 +61,9 @@ class _JuzTabState extends State<JuzTab> {
                               ),
                               child: Center(
                                 child: Text(
-                                  '${index + 1}',
+                                  '${surah.number}',
                                   style: whiteTextStyle.copyWith(
-                                    fontSize: 18,
-                                    fontWeight: semiBold,
-                                  ),
+                                      fontSize: 16, fontWeight: medium),
                                 ),
                               ),
                             ),
@@ -78,7 +72,7 @@ class _JuzTabState extends State<JuzTab> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Juz ${index + 1}',
+                                  surah.name!.transliteration!.id!,
                                   style: whiteTextStyle.copyWith(
                                     fontSize: 18,
                                     fontWeight: semiBold,
@@ -86,35 +80,38 @@ class _JuzTabState extends State<JuzTab> {
                                 ),
                                 const SizedBox(height: 4),
                                 Text(
-                                  'Mulai dari ${juz.juzStartInfo}',
+                                  '${surah.revelation!.id} | ${surah.numberOfVerses} Ayat',
                                   style: greyTextStyle.copyWith(
                                     fontSize: 14,
                                     fontWeight: medium,
                                   ),
-                                ),
-                                Text(
-                                  'Sampai ${juz.juzEndInfo}',
-                                  style: greyTextStyle.copyWith(
-                                    fontSize: 14,
-                                    fontWeight: medium,
-                                  ),
-                                ),
+                                )
                               ],
+                            ),
+                            const Spacer(),
+                            Text(
+                              surah.name!.short!,
+                              style: lightTextStyle.copyWith(
+                                fontSize: 24,
+                                fontWeight: bold,
+                              ),
                             )
                           ],
                         ),
                       ),
+                    ),
+                    Divider(
+                      color: greyColor.withOpacity(.4),
                     ),
                   ],
                 );
               },
             );
           }
-
-          if (state is JuzFailed) {
+          if (state is GetApiQuranFailed) {
             return Center(
               child: Text(
-                state.message,
+                state.error,
                 style: whiteTextStyle,
               ),
             );

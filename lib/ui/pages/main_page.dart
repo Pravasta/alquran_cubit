@@ -1,7 +1,8 @@
 import 'package:alquran_new/shared/theme.dart';
-import 'package:alquran_new/ui/bottom_nav/bookmark_page.dart';
-import 'package:alquran_new/ui/bottom_nav/doa_page.dart';
-import 'package:alquran_new/ui/bottom_nav/home_page.dart';
+import 'package:alquran_new/ui/pages/bottom_nav/bookmark_page.dart';
+import 'package:alquran_new/ui/pages/bottom_nav/doa_page.dart';
+import 'package:alquran_new/ui/pages/bottom_nav/doa_solat.dart';
+import 'package:alquran_new/ui/pages/bottom_nav/home_page.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatefulWidget {
@@ -17,6 +18,7 @@ class _MainPageState extends State<MainPage> {
   List indexWidget = [
     const HomePage(),
     const DoaPage(),
+    const DoaSolatPage(),
     const BookmarkPage(),
   ];
 
@@ -55,6 +57,7 @@ class _MainPageState extends State<MainPage> {
       items: [
         bottomNavbarItem('assets/buttom_navbar1.png', 'Quran'),
         bottomNavbarItem('assets/buttom_navbar4.png', 'Doa'),
+        bottomNavbarItem('assets/buttom_navbar3.png', 'Doa Solat'),
         bottomNavbarItem('assets/buttom_navbar5.png', 'Bookmark'),
       ],
     );

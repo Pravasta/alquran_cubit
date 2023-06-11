@@ -1,8 +1,8 @@
 import 'package:alquran_new/shared/theme.dart';
-import 'package:alquran_new/ui/tabs/prayer_page.dart';
-import 'package:alquran_new/ui/tabs/puasa_tab.dart';
-import 'package:alquran_new/ui/tabs/juz_tab.dart';
-import 'package:alquran_new/ui/tabs/surah_tab.dart';
+import 'package:alquran_new/ui/pages/home_page/tabs/prayer_page.dart';
+import 'package:alquran_new/ui/pages/home_page/tabs/puasa_tab.dart';
+import 'package:alquran_new/ui/pages/home_page/tabs/juz_tab.dart';
+import 'package:alquran_new/ui/pages/home_page/tabs/surah_tab.dart';
 import 'package:alquran_new/ui/widgets/banner_widget.dart';
 import 'package:alquran_new/ui/widgets/custom_text_field.dart';
 import 'package:alquran_new/ui/widgets/header_widget.dart';
